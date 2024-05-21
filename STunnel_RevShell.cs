@@ -1,5 +1,5 @@
 //compile the file
-//	
+//	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe STunnel_RevShell.cs
 
 using System;
 using System.Text;
