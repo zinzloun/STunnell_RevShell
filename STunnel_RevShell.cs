@@ -27,6 +27,24 @@ namespace ReverseShell2_SSL
 
         static void Main(string[] args)
         {
+
+            Console.WriteLine(@"
+
+                
+ _____ _____                      _  ______             _  _          _ _ 
+/  ___|_   _|                    | | | ___ \           | || |        | | |
+\ `--.  | |_   _ _ __  _ __   ___| | | |_/ /_____   __/ __) |__   ___| | |
+ `--. \ | | | | | '_ \| '_ \ / _ \ | |    // _ \ \ / /\__ \ '_ \ / _ \ | |
+/\__/ / | | |_| | | | | | | |  __/ | | |\ \  __/\ V / (   / | | |  __/ | |
+\____/  \_/\__,_|_| |_|_| |_|\___|_| \_| \_\___| \_/   |_||_| |_|\___|_|_|
+                                                                          
+ver 1.0 Coded by GuerraIT                               
+
+                
+            ");
+
+
+            
             Console.WriteLine(@"Starting decoding, please wait...");
             Thread.Sleep(3000);
 
