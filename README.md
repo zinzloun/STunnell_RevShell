@@ -85,9 +85,9 @@ Executing Program.exe we should read the following on the shell
 	Remote cert was issued to CN=xxxxxx ......
 The you shoud get a CMD shell on the attacker
 
-## Missing server connection
+## Exceptions use case: missing server connection
 ### nc is not listening on the server
-The client app continues to send requests to the server, you will see on the console the certificate info looping:
+Since the client app can connect to Stunnell but not to nc, it will continue to send requests to the server. You will see on the console the certificate info looping:
 	
  	...
 	Certificate revocation list checked: False
@@ -97,13 +97,14 @@ The client app continues to send requests to the server, you will see on the con
  	Certificate revocation list checked: False
 	Remote cert was issued to CN=xxxx....
 	...
-At soon as the nc listener is started on the server the client will connect immediately, stopping to print the certificate information and you should get the shell.
-## Stunnell is not listening on the server
-In this case the client will keep to try to connect to the server. You won't get the certificate information printed in this case:
+At soon as the nc listener is started on the server the client will connect immediately, stopping to print the certificate information; you will get the shell.
+
+## Stunnell service is not reachable
+In this case the client will keep to try to connect to Stunnel. You won't get the certificate information printed in this case, only the following line:
 
 	...
 	Using the following connection 192.168.1.7:9999
-As soon as sconnect will start the app will connect to the server, switching to the previous state (looping certificate info printend on the screen). If nc listener is also started you will get a shell
+As soon as the client can connect to Stunnel the app will switch to the previous state (looping certificate info printend on the screen). If nc listener is also started on the server you will get a shell.
 
 ## Persistence
 You can use the app as a service
