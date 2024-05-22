@@ -106,8 +106,6 @@ In this case the client will keep to try to connect to Stunnel. You won't get th
 	Using the following connection 192.168.1.7:9999
 As soon as the client can connect to Stunnel the app will switch to the previous state (looping certificate info printend on the screen). If nc listener is also started on the server you will get a shell.
 
-## Persistence
-You can use the app as a service
 
 ## Trouble shooting on Kali
 If you get the following error re-starting stunnel:
