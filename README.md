@@ -13,7 +13,7 @@ Server is the attacker running stunnel4. Follows the configuration:
 	client = no
 	accept = 9999
 	connect = 127.0.0.1:6666
-	cert = /etc/stunnel/lguerra.pem
+	cert = /etc/stunnel/stunnel.pem
 	
 	 
 Here we set stunnel listening for incoming connection on port 9999. This connection is encrypted, then forwards the stream  to port 6666 where we will have nc listening. This flow is not encrypted of course.
