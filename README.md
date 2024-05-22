@@ -85,7 +85,7 @@ Executing Program.exe we should read the following on the shell
 	Remote cert was issued to CN=xxxxxx ......
 The you shoud get a CMD shell on the attacker
 
-## Exception use cases: missing server connection
+## Exception: missing server connection
 ### nc is not listening on the server
 Since the client app can connect to Stunnell but not to nc, it will continue to send requests to the server. You will see on the console the certificate info looping:
 	
