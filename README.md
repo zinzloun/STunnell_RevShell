@@ -1,5 +1,5 @@
 # STunnell_RevShell
-A Reverse shell through Stunnel.
+Stunell reverse shell 
 ## Architecture
 - Client Net4.8 C#
 - Server Stunnell4
